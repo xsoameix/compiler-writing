@@ -1,0 +1,8 @@
+# executables
+*.bin
+
+# vim
+*.swp
+
+# book
+*.djvu
