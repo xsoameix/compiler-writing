@@ -34,20 +34,13 @@ h(char f, char s) { /* character-pair matrix h */
 int
 main(void) {
   /* stack, input and output string */
-  char s[100] = {'('}, in[] = "a+b<c^d^e", out[100] = {0}, p = '(';
+  char s[100] = {'('}, in[] = "a+b<c^d^e", out[100] = {0}, p = '(', loop = 0;
   int top = 1, i = 0, j = 0, len = sizeof(in) / sizeof(in[0]);
-  for (; i < len && h(p, in[i]); p = in[i++])
-    while (top || !(i = len - 1, top = 1))
-      if (g(s[top-1]) < f(in[i])) {
-        s[top++] = in[i];
-        break;
-      } else if (g(s[top-1]) > f(in[i])) {
-        out[j++] = s[--top];
-      } else {
-        top--;
-        break;
-      }
+  for (; i < len && top && h(p, in[i]); p = loop ? p : in[i++], loop = 0)
+    if (g(s[top-1]) < f(in[i]))      s[top++] = in[i];
+    else if (g(s[top-1]) > f(in[i])) out[j++] = s[--top], loop = 1;
+    else                             top--;
   puts(i < len && !h(p, in[i]) ? "INVALID SYMBOL PAIR" :
-       top ? "INVALID EXPRESSION" : out);
+       (i < len) == (top == 0) ? "INVALID EXPRESSION" : out);
   return 0;
 }

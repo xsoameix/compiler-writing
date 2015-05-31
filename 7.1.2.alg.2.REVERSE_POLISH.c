@@ -22,19 +22,12 @@ g(char c) { /* stack precedence function */
 int
 main(void) {
   /* stack, input and output string */
-  char s[100] = {'('}, in[] = "(a+b)*(c-d)", out[100] = {0};
+  char s[100] = {'('}, in[] = "(a+b)*(c-d)", out[100] = {0}, loop = 0;
   int top = 1, i = 0, j = 0, len = sizeof(in) / sizeof(in[0]);
-  while (i++ < len)
-    while (1)
-      if (g(s[top-1]) < f(in[i-1])) {
-        s[top++] = in[i-1];
-        break;
-      } else if (g(s[top-1]) > f(in[i-1])) {
-        out[j++] = s[--top];
-      } else {
-        top--;
-        break;
-      }
+  for (; i < len; i += !loop, loop = 0)
+    if (g(s[top-1]) < f(in[i]))      s[top++] = in[i];
+    else if (g(s[top-1]) > f(in[i])) out[j++] = s[--top], loop = 1;
+    else                             top--;
   printf("%s\n", out);
   return 0;
 }
