@@ -81,9 +81,9 @@ main(void) {
   /* operator and operand stack, input and output string */
   char r[100] = {'('}, in[] = IF "a<b" THEN "c=d=%" IF "e" THEN "f" ELSE "g",
        out[100] = {0}, p = '(', loop = 0;
-  nd_t t[100] = {0};
+  nd_t t[100] = {0}, d;
   int i = 0, len = sizeof(in) / sizeof(in[0]), ri = 1, ti = 1, n[100], ni = 0;
-  for (; i < len && ri && h(p, in[i]); p = loop ? p : in[i++], loop = 0)
+  for (; i < len && ri && h(p, in[i]); loop || (p = in[i++]), loop = 0)
     if (!op(in[i])) t[ti] = (nd_t) {in[i]}, n[ni++] = ti++;
     else if (g(r[ri-1]) < f(in[i])) r[ri++] = in[i];
     else if (g(r[ri-1]) > f(in[i]) && (loop = 1))
@@ -92,10 +92,7 @@ main(void) {
     else ri--;
   if (i < len && !h(p, in[i]))     puts("INVALID SYMBOL PAIR");
   else if ((i < len) == (ri == 0)) puts("INVALID EXPRESSION");
-  else while (ni-- && putchar(t[n[ni]].op) || !putchar('\n')) {
-    int l = t[n[ni]].l, r = t[n[ni]].r;
-    if (r) n[ni++] = r;
-    if (l) n[ni++] = l;
-  }
+  else while (ni-- && (d = t[n[ni]], 1) || !putchar('\n'))
+    putchar(d.op), d.r && (n[ni++] = d.r), d.l && (n[ni++] = d.l);
   return 0;
 }

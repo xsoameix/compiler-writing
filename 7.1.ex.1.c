@@ -36,7 +36,7 @@ main(void) {
   /* stack, input and output string */
   char s[100] = {'('}, in[] = "a+b<c^d^e", out[100] = {0}, p = '(', loop = 0;
   int top = 1, i = 0, j = 0, len = sizeof(in) / sizeof(in[0]);
-  for (; i < len && top && h(p, in[i]); p = loop ? p : in[i++], loop = 0)
+  for (; i < len && top && h(p, in[i]); loop || (p = in[i++]), loop = 0)
     if (g(s[top-1]) < f(in[i]))      s[top++] = in[i];
     else if (g(s[top-1]) > f(in[i])) out[j++] = s[--top], loop = 1;
     else                             top--;

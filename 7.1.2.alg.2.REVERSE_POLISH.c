@@ -24,7 +24,7 @@ main(void) {
   /* stack, input and output string */
   char s[100] = {'('}, in[] = "(a+b)*(c-d)", out[100] = {0}, loop = 0;
   int top = 1, i = 0, j = 0, len = sizeof(in) / sizeof(in[0]);
-  for (; i < len; i += !loop, loop = 0)
+  for (; i < len; loop || i++, loop = 0)
     if (g(s[top-1]) < f(in[i]))      s[top++] = in[i];
     else if (g(s[top-1]) > f(in[i])) out[j++] = s[--top], loop = 1;
     else                             top--;
