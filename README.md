@@ -36,3 +36,51 @@ The following are questions for each exercise.
     Formulate an algorithm to perform the translation assuming infix expressions consisting of single-letter variables and the four arithmetic operators. 
 
 6.  Investigate the possibility of obtaining precedence functions for an expression in APL. What difficulties, if any, are there in obtaining these functions? 
+
+## Exercises 7-2
+
+1.  Prove that in an operator grammar every sentential form cannot contain two consecutive nonterminals.
+
+2.  Given the grammar
+
+        E → T | E - T
+        T → F | T * F
+        F → P | 𝜃 P
+        P → i | ( E )
+
+    Obtain the following:
+    
+    (a) The phrases and prime phrases of the sentential forms
+
+        𝜃(i-i), i-i*i, i*i-𝜃i, T-T*F, P-𝜃P
+
+    (b) Operator precedence matrix
+
+    (c) Precedence functions for the grammar, if they exist
+
+    (d) The table of allowable adjacent operator pairs
+
+    (e) The parse (as in Table 7-10) for the input strings 𝜃(i-i) and (i-𝜃i)
+
+3.  Given the grammar
+
+        E → I | E ≡ I
+        I → D | I ⊃ D
+        D → C | D ∨ C
+        C → S | C ∧ S
+        S → P | ¬ P
+        P → t | f | ( E )
+
+    Obtain the following:
+
+    (a) Operator precedence matrix
+
+    (b) The parse (as in Table 7-10) for the input strings t⊃f, t∧f∨t, ¬(t∨f)≡t
+
+    (c) Precedence functions for the grammar, if they exist
+
+4.  Formulate an algorithm which has as input a given grammar, and produces as output, a table of allowable adjacent operator pairs.
+
+5.  Prove that in an operator grammar "if bX occurs in a sentential form 𝜙, where b is a terminal and X is a nonterminal, then any phrase of 𝜙 containing b also contains X."
+
+6.  Prove that in an operator grammar no phrase in a sentential form is immediately preceded (or followed) by non terminal symbols.
