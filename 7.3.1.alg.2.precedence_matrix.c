@@ -30,7 +30,7 @@ main(void) { /* m: map char to i, c: precedence matrix                  */
   while (i < gl || (i = 0)) g[i] == ':' && (nt = g[i-1]), /* set l, r */
     (g[i] == ':' || g[i] == '|') && (l[ll][0] = nt, l[ll++][1] = g[i+1]),
     (iscntrl(g[i]) || g[i] == '|') && (r[rl][0] = nt, r[rl++][1] = g[i-1]), i++;
-  while (i < sl || (i = 0)) m[s[i]] = i++; /* set m */
+  while (i < sl || (i = 0)) m[s[i]] = i, i++; /* set m */
   warshall(m, l, b, sl, ll), warshall(m, r, e, sl, rl); /* set b(L⁺), e(R⁺) */
   while (++i < gl) S(g[i-1]) && S(g[i]) && (p[pl++] = g + i - 1); /* set p(≐) */
   for (i = 0; i < pl && (x = p[i][0], y = p[i][1], c[m[x]][m[y]] = '='); i++) {
