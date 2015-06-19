@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define L(x) (sizeof(x) / sizeof(x[0]))
-
 int S(char c) { return c != ':' && c != '|' & c != '\n' && c; }
 int N(char c) { return isupper(c); }    /* is nonterminal ? */
 int T(char c) { return S(c) && !N(c); } /* is terminal ? */

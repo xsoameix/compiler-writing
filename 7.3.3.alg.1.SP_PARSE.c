@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define L(x) (sizeof(x) / sizeof(x[0]))
-
 int RB(char c) { return c == ':' || c == '|'; }        /* is RHS beginning ? */
 int RE(char c) { return c == '|' || c == '\n' || !c; } /* is RHS ending ?    */
 int S(char c) { return c != ':' && c != '|' & c != '\n' && c; }
@@ -54,7 +52,7 @@ P(char * s, char c[11][11], v_t v[10]) {
 
 int          /* i*i+i => VALID, i*i++i => INVALID */
 main(void) { /* v: reverse map RHS to nonterminal, d: valid */
-  char t[] = "i*i+i", s[100] = {0}, c[11][11] = {0}, m[128];
+  char t[] = "i+i*i", s[100] = {0}, c[11][11] = {0}, m[128];
   v_t v[10] = {0}; int i = (C(c, v, m), 0), j = 0, l = sizeof(t), d = 1;
   while (!(j == 1 && s[j] == 'E' && puts("VALID") || !d && puts("INVALID")))
     if (c[m[s[j]]][m[t[i]]] > 1) s[++j] = t[i++];
